@@ -10,6 +10,7 @@ local parsed = rapidjson.decode(file:read("*all"))
 file:close()
 
 local directories = parsed["directories"]
+local version = parsed["version"]
 
 function string:starts_with (s)
     return string.sub(self, 1, string.len(s)) == s
@@ -28,6 +29,11 @@ function add(dir)
     end
     table.insert(directories, dir)
     save_settings()
+end
+
+function change(new_version)
+	version = new_version
+	save_settings()
 end
 
 function remove(index)
@@ -85,6 +91,7 @@ end
 args = {
     ["add"] = add,
     ["remove"] = remove,
+	["change"] = change,
     ["dirs"] = dirs,
     ["go"] = go,
     ["list"] = list,

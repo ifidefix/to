@@ -49,6 +49,7 @@ function _to_go {
             $TO version
             ;;
 		"--change-version" | "-c")
+			echo "Warning: Not all versions have all the possibilities implemented and additional packages might be required"
 			$TO change $2 #Change the setting
 			exec $DIR/source.sh #Rerun this file (executable permission needed)
 			;;
