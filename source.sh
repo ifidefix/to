@@ -2,10 +2,18 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Use this to change the target implementation
-target=haskell
 
-case "$target" in
+FILE=~/.config/to
+# If the file exists, read from the file    
+if [ -f $FILE ]; then
+    version=$(jq -r '.version' ~/.config/to)
+else # If the file does not exist, set the default target to python and copy the basic config file to the target location.
+    version=python
+    cp $DIR/basic_config_file $FILE
+fi
+
+
+case "$version" in
     rust)
         TO="$DIR/rust/target/release/to"
         ;;
@@ -19,7 +27,8 @@ case "$target" in
         TO="$DIR/haskell/.stack-work/install/x86_64-linux/lts-8.0/8.0.2/bin/haskell-exe"
         ;;
     *)
-        echo "Error! Unknown target language $target"
+        echo "to: Error! Unknown target language "$version" specified in ~/.config/to"
+		echo "to: Change version in ~/.config/to to either rust, lua, python or haskell"
         #exit 1
         ;;
 esac
@@ -39,6 +48,10 @@ function _to_go {
         "--version" | "-v")
             $TO version
             ;;
+		"--change-version" | "-c")
+			$TO change $2 #Change the setting
+			exec $DIR/source.sh #Rerun this file (executable permission needed)
+			;;
         "")
             echo "Usage: to <dir>"
             echo "Tip: Use the tab key to autocomplete."

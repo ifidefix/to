@@ -18,6 +18,11 @@ def save_settings():
     json.dump(settings, open(CONF_PATH, 'w'), indent=4)
 
 
+def change(new_version):
+	settings["version"]=new_version
+	save_settings()
+
+
 def add(dir):
     if dir is None:
         dir = os.getcwd()
@@ -73,6 +78,7 @@ if __name__ == "__main__":
     {
         "add": add,
         "remove": remove,
+		"change": change,
         "dirs": dirs,
         "go": go,
         "list": list_dirs,
