@@ -12,7 +12,8 @@ include!(concat!(env!("OUT_DIR"), "/serde_types.rs"));
 impl Settings {
     pub fn new() -> Settings {
         Settings {
-            directories: Vec::new()
+            directories: Vec::new(),
+			version: String::from("rust")
         }
     }
 

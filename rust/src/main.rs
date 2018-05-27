@@ -82,6 +82,10 @@ fn main() {
             println!("To: Rust version");
             return;
         }
+		"change" => {
+			change(query, settings);
+			return;
+		}
         // list, go or an invalid mode
         _ => {}
     }
@@ -135,6 +139,11 @@ fn add(path: String, mut settings: Settings) {
     else {
         println!("Error: not a valid directory");
     }
+}
+
+fn change(new_version: String, mut settings: Settings) {
+	settings.version = new_version;
+	save_settings(&settings);
 }
 
 fn remove(index: &str, mut settings: Settings) {
