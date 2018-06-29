@@ -54,7 +54,7 @@ function _to_go {
 			exec $DIR/source.sh #Rerun this file (executable permission needed)
 			;;
 		"--help" | "-h")
-			echo "Usage: to [OPTION]... [DIR]...
+			echo "Usage: to [OPTION] [DIR]
     Searches the subdirectories of directories set in the settings for DIR.
     If it is found, it changes the current directory to DIR.  The default DIR
     is the value of the	HOME shell variable.

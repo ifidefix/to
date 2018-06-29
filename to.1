@@ -1,0 +1,41 @@
+.\" Manpage for to.
+.TH man 1 "29 June 2018" "1.0" "to man page"
+.SH NAME
+to \- Change directory to any of your favorite folders with a single short command
+.SH SYNOPSIS
+to [OPTIONS] [DIR]
+.SH DESCRIPTION
+to is a command line tool to change the working directory directly to any directory in the system. It uses a config file placed at ~/.config/to, which contains all the directories it will look into and the software version it is currently using.
+.SH OPTIONS
+.IP "-a, --add"
+add DIR to the settings
+.IP "-d, --dirs"
+lists all directories in the settings
+.IP "-l, --list"
+same as -d
+.IP "-r, --remove"
+remove DIR from the settings if it was in there
+.IP "-v, --version"
+list which version is currently being used
+.IP "-c, --change-version"
+changes the version being used to the value given
+possible values: python, rust, lua or haskell
+.IP "-h, --help"
+show this help text
+.SH FILES
+.I ~/.config/to
+.RS
+The file containing the settings.
+.SH EXAMPLES
+.IP "to -a /usr"
+Adds /usr to the search directories
+.IP "to share"
+Goes directly to /usr/share. Assuming that /usr is in the search directories
+.IP "to -l"
+Lists all search directories
+.IP "to -r 0"
+Removes the first entry in the list returned by to -l
+.IP "to -c python"
+Changes the version that is being used to the python3 version
+.SH BUGS
+The haskell implementation does not implement the change-version command.

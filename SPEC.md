@@ -24,9 +24,9 @@ Always save the settings file in **pretty printed** JSON.
 Excessive arguments may be safely ignored.
  
 ## list
-    to list [query]
+    to --list [query]
 Return the names of all directories *dir* such that:
-1. *dir* is a sub-directory of one of the directories in the settings file
+1. *dir* is one of the directories in the settings file
 2. The name of *dir* starts with *query*
 
 It is possible that some of the directories in the settings file are no longer valid (i.e. were deleted), 
@@ -36,10 +36,11 @@ output:
 * The names all directories satisfying (1) and (2), if any.
 
 ## go
-    to go [query]
-Returns the absolute path to the directory *dir* such that: 
-1. constraints (1) and (2) of the list command are met
-2. No *dir2* also satisfying the above constraint exists such that: 
+    to [query]
+Changes the working directory to the directory *dir* such that: 
+1. *dir* is a sub-directory of one of the directories in the settings file
+2. The name of *dir* starts with *query*
+3. No *dir2* also satisfying the above constraint exists such that: 
     * The length of the name of *dir2* is shorter than *dir*, **or**
     * The name of *dir* is equal to the name of *dir2*, and the parent directory of *dir2* has a lower index than the parent directory of *dir*    
 
@@ -48,12 +49,12 @@ The requirements can for example be met by first getting all sub-directories of 
  Then return the first element of this list, if any.
  
 output:
-* "*dir*" if found
-* "Error: no results found" if no *dir* exists
+* "*dir*" if found, the current working directory is changed to *dir*
+* "Error: no results found: No such file or directory" if no such *dir* exists
 
 
 ## add
-    to add [dir]
+    to --add [dir]
 Adds a directory to the settings file. 
 If *dir* is not specified, add the current working directory.
 
@@ -62,7 +63,7 @@ output:
 * "Error: not a valid directory" if *dir* is not a valid absolute path
 
 ## dirs
-    to dirs
+    to --dirs
 List all directories in the settings file. Indexing may start at either 0 or 1, but must be consistent with indexing of the remove command.
 
 output:
@@ -70,7 +71,7 @@ output:
 * "Error: No directories in settings file" if there are not directories in the settings file
 
 ## remove
-    to remove [index]
+    to --remove [index]
 Remove the directory at *index* in the list "directories" of the settings file.
 
 output:
@@ -78,5 +79,9 @@ output:
 * "Error: *index* is not a valid index" if *index* is not an integer, or exceeds the list bounds
 
 ## version
-    to version
+    to --version
 Print "To: *lang* version", where *lang* is a short description of the programming language used to write this implementation.
+
+## change
+    to --change-version [new_version]
+Change the version that is being used to *new_version*. Possible values for *new_version*: python, haskell, lua, rust
