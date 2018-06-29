@@ -49,13 +49,29 @@ function _to_go {
             $TO version
             ;;
 		"--change-version" | "-c")
-			echo "Warning: Not all versions have all the possibilities implemented and additional packages might be required"
+			echo "Warning: Not all versions have all the options implemented and additional packages might be required"
 			$TO change $2 #Change the setting
 			exec $DIR/source.sh #Rerun this file (executable permission needed)
 			;;
+		"--help" | "-h")
+			echo "Usage: to [OPTION]... [DIR]...
+    Searches the subdirectories of directories set in the settings for DIR.
+    If it is found, it changes the current directory to DIR.  The default DIR
+    is the value of the	HOME shell variable.
+
+  Options:
+    -a, --add                  add DIR to the settings
+    -d, --dirs                 lists all directories in the settings
+    -l, --list                 same as -d
+    -r, --remove               remove DIR from the settings if it was in there
+    -v, --version              list which version is currently being used
+    -c, --change-version       changes the version being used to the value given
+                               possible values: python, rust, lua or haskell
+    -h, --help                 show this help text
+			"
+			;;
         "")
-            echo "Usage: to <dir>"
-            echo "Tip: Use the tab key to autocomplete."
+            cd
             ;;
 		*)
 			cd "$($TO go $1)"
