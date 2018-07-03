@@ -25,6 +25,24 @@ A short description is provided here:
     
     # Remove the favorite at index 0
     to -r 0
+    
+# Installation
+- Clone the repository
+- Change the permissions of source.sh to executable
+
+
+    chmod +x source.sh
+
+- Run source.sh
+
+
+    ./source.sh
+    
+- Enjoy jumping to all your favorite directories
+
+source.sh should be ran every time an interactive shell is started because it sets some aliasses. This could be done by adding it to a file that is ran every time an interactive shell is started, for example ~/.profile or ~/.bashrc.
+
+
 
 # Installing the manpage
 First, check where the manpages are stored:
